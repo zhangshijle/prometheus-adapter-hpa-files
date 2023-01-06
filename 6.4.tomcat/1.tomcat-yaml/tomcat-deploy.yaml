@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: tomcat
-        image: registry.cn-hangzhou.aliyuncs.com/zhangshijie/tomcat-app1:tomcat_exporter_v2 
+        image: zhangshijie/metrics-server:tomcat_exporter_v2 
         imagePullPolicy: Always
         ports:
         - containerPort: 8080

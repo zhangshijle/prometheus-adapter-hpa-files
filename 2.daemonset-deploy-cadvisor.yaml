@@ -19,7 +19,7 @@ spec:
       restartPolicy: Always   # 重启策略
       containers:
       - name: cadvisor
-        image: registry.cn-hangzhou.aliyuncs.com/zhangshijie/cadvisor-amd64:v0.45.0  #或更换为其它镜像仓库地址下载
+        image: zhangshijie/cadvisor-amd64:v0.45.0  #或更换为其它镜像仓库地址下载
         imagePullPolicy: IfNotPresent  # 镜像策略
         resources:
           requests:
