@@ -1,0 +1,11 @@
+# See the OWNERS docs at https://go.k8s.io/owners
+approvers:
+  - prometheus-adapter-approvers
+
+reviewers:
+  - prometheus-adapter-approvers
+
+emeritus_approvers:
+- brancz
+- directxman12
+- lilic
