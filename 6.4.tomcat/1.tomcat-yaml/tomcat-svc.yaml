@@ -1,0 +1,16 @@
+kind: Service  #service 类型
+apiVersion: v1
+metadata:
+  annotations:
+    prometheus.io/scrape: 'true'
+  name: tomcat-service
+  namespace: myserver
+spec:
+  selector:
+    app: tomcat
+  ports:
+  - nodePort: 31080
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+  type: NodePort

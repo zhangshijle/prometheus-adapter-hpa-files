@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: cadvisor
+  namespace: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: cAdvisor
+  template:
+    metadata:
+      labels:
+        app: cAdvisor
+    spec:
+      tolerations:    #污点容忍,忽略master的NoSchedule
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/master
+      hostNetwork: true
+      restartPolicy: Always   # 重启策略
+      containers:
+      - name: cadvisor
+        image: registry.cn-hangzhou.aliyuncs.com/zhangshijie/cadvisor-amd64:v0.45.0  #或更换为其它镜像仓库地址下载
+        imagePullPolicy: IfNotPresent  # 镜像策略
+        resources:
+          requests:
+            memory: 250Mi
+            cpu: 250m
+          limits:
+            cpu: 400m
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+          - name: root
+            mountPath: /rootfs
+          - name: run
+            mountPath: /var/run
+          - name: sys
+            mountPath: /sys
+          - name: docker
+            mountPath: /var/lib/docker
+          - name: disk
+            mountPath: /dev/disk
+      volumes:
+      - name: root
+        hostPath:
+          path: /
+      - name: run
+        hostPath:
+          path: /var/run
+      - name: sys
+        hostPath:
+          path: /sys
+      - name: docker
+        hostPath:
+          path: /var/lib/docker
+      - name: disk
+        hostPath:
+          path: /dev/disk

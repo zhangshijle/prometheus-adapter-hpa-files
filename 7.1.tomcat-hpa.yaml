@@ -1,0 +1,33 @@
+kind: HorizontalPodAutoscaler
+apiVersion: autoscaling/v2
+metadata:
+  name: tomcat-deployment-hpa
+  namespace: myserver
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: tomcat-deployment
+  minReplicas: 2
+  maxReplicas: 10
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 30
+      policies:
+        - type: Percent
+          value: 100
+          periodSeconds: 15
+    scaleUp:
+      stabilizationWindowSeconds: 0
+      policies:
+        - type: Percent
+          value: 100
+          periodSeconds: 15
+  metrics:
+    - type: Pods
+      pods:
+        metric:
+          name: tomcat_session_active
+        target:
+          type: AverageValue
+          averageValue: 20000m #平均每个pod带宽速率达到20kb就进行扩容
