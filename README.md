@@ -1,0 +1,1 @@
+# HPA结合prometheus收集的pod指标数据实现k8s pod副本弹性伸缩
