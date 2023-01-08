@@ -10,24 +10,24 @@ spec:
     name: tomcat-deployment
   minReplicas: 2
   maxReplicas: 10
-  behavior:
-    scaleDown:
-      stabilizationWindowSeconds: 30
-      policies:
+  behavior: #定义行为
+    scaleDown:  #缩容配置
+      stabilizationWindowSeconds: 30 #窗口稳定期，防止在此期间pod数量频繁波动
+      policies: #具体策略
+        - type: Percent #基于百分比进行pod调整
+          value: 100 #允许对当前pod数量的百分之百进行调整
+          periodSeconds: 15 #间隔时间为15s，每间隔15s允许对pod副本数量的百分之百调整，直到缩容到minReplicas
+    scaleUp: #扩容配置
+      stabilizationWindowSeconds: 0 #窗口稳定期，防止在此期间pod数量频繁波动
+      policies: #具体策略
         - type: Percent
-          value: 100
-          periodSeconds: 15
-    scaleUp:
-      stabilizationWindowSeconds: 0
-      policies:
-        - type: Percent
-          value: 100
-          periodSeconds: 15
-  metrics:
-    - type: Pods
-      pods:
-        metric:
-          name: tomcat_session_active
-        target:
-          type: AverageValue
+          value: 100 #允许对当前pod数量的百分之百进行调整
+          periodSeconds: 15 #间隔时间为15s，每间隔15s允许对pod副本数量的百分之百调整，直到扩容到maxReplicas
+  metrics: #定义指标来源
+    - type: Pods #类型为pod指标
+      pods: #定义具体pod指标
+        metric: #指标配置
+          name: tomcat_session_active #指标名称
+        target: #目标匹配配置
+          type: AverageValue #每秒平均值
           averageValue: 20000m #平均每个pod带宽速率达到20kb就进行扩容
