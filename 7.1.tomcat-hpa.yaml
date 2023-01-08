@@ -4,12 +4,12 @@ metadata:
   name: tomcat-deployment-hpa
   namespace: myserver
 spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: tomcat-deployment
-  minReplicas: 2
-  maxReplicas: 10
+  scaleTargetRef: #定义目标资源
+    apiVersion: apps/v1 #目标资源API版本
+    kind: Deployment #目标资源类型
+    name: tomcat-deployment #目标资源名称
+  minReplicas: 2  #最小副本数
+  maxReplicas: 10 #最大副本数
   behavior: #定义行为
     scaleDown:  #缩容配置
       stabilizationWindowSeconds: 30 #窗口稳定期，防止在此期间pod数量频繁波动
