@@ -6,7 +6,7 @@ metadata:
 spec:
   scaleTargetRef: #定义目标资源
     apiVersion: apps/v1 #目标资源API版本
-    kind: Deployment #目标资源类型
+    kind: Deployment #目标资源类型为Deploymen
     name: tomcat-deployment #目标资源名称
   minReplicas: 2  #最小副本数
   maxReplicas: 10 #最大副本数
