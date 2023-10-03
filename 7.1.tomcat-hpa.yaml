@@ -10,7 +10,7 @@ spec:
     name: tomcat-deployment #目标资源名称
   minReplicas: 2  #最小副本数
   maxReplicas: 10 #最大副本数
-  behavior: #定义行为
+  behavior: #定义行为,HorizontalPodAutoscalerBehavior 配置目标在向上和向下方向上的缩放行为（分别为scaleUp 和scaleDown 字段）
     scaleDown:  #缩容配置
       stabilizationWindowSeconds: 30 #窗口稳定期，防止在此期间pod数量频繁波动
       policies: #具体策略
