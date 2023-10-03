@@ -16,15 +16,6 @@ data:
         as: "${1}_qps"
       metricsQuery: sum(rate(<<.Series>>{<<.LabelMatchers>>}[30s])) by (<<.GroupBy>>)
 
-    - seriesQuery: '{__name__=~"^container_network_receive_bytes_total$",container="POD",namespace!="",pod!=""}'
-      resources:
-        overrides:
-          namespace: { resource: "namespace" }
-          pod: { resource: "pod" }
-      name:
-        matches: "(.*)_total"
-        as: "${1}"
-      metricsQuery: sum(rate(<<.Series>>{<<.LabelMatchers>>}[30s])) by (<<.GroupBy>>)
 
     - seriesQuery: '{__name__=~"^container_.*",container!="POD",namespace!="",pod!=""}'
       seriesFilters: []

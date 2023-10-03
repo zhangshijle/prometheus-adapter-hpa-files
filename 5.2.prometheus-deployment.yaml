@@ -53,7 +53,7 @@ spec:
                 mode: 0644
         - name: prometheus-storage-volume
           nfs:
-            server: 172.31.6.109
+            server: 172.31.7.109
             path: /data/k8sdata/prometheus-data
           #hostPath:
           # path: /data/prometheusdata

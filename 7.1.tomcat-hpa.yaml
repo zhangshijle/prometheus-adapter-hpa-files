@@ -27,7 +27,8 @@ spec:
     - type: Pods #类型为pod指标
       pods: #定义具体pod指标
         metric: #指标配置
-          name: tomcat_session_active #指标名称
+          name: network_receive_bytes #指标名称
+          #name: tomcat_session_active #指标名称
         target: #目标匹配配置
           type: AverageValue #每秒平均值
-          averageValue: 20000m #平均每个pod带宽速率达到20kb就进行扩容
+          averageValue: 409600m #平均每个pod带宽速率达到50Kb就进行扩容,50(Kb)*1024(bytes)*8(bit)

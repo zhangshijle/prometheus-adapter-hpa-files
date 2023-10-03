@@ -6,7 +6,7 @@ metadata:
   name: custom-metrics-apiserver
   namespace: monitoring
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: custom-metrics-apiserver
@@ -19,7 +19,8 @@ spec:
       serviceAccountName: custom-metrics-apiserver
       containers:
       - name: custom-metrics-apiserver
-        image: zhangshijie/prometheus-adapter:v0.10.0
+        #image: zhangshijie/prometheus-adapter:v0.10.0
+        image: registry.cn-hangzhou.aliyuncs.com/zhangshijie/prometheus-adapter:v0.10.0 
         args:
         - --secure-port=6443
         - --tls-cert-file=/var/run/serving-cert/serving.crt
